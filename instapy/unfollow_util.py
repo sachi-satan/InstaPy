@@ -720,8 +720,9 @@ def get_users_through_dialog_with_graphql(
 
     # iterate over page size and add users to the list
     for follower in followers_page:
-        # get follower name
-        followers_list.append(follower["node"]["username"])
+        if not follower["node"]["is_private"]:
+            # get follower name
+            followers_list.append(follower["node"]["username"])
 
     has_next_page = data["data"]["user"][str(edge_type)]["page_info"]["has_next_page"]
 
@@ -757,8 +758,9 @@ def get_users_through_dialog_with_graphql(
 
         # iterate over page size and add users to the list
         for follower in followers_page:
-            # get follower name
-            followers_list.append(follower["node"]["username"])
+            if not follower["node"]["is_private"]:
+                # get follower name
+                followers_list.append(follower["node"]["username"])
 
         # check if there is next page
         has_next_page = data["data"]["user"][str(edge_type)]["page_info"][
